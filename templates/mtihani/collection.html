@@ -1,0 +1,37 @@
+{% extends 'mtihani/home.html' %}
+
+{% block content%}
+<div class="container card p-3 boarder-dark" style="width: 95%;">
+    <h5 class="text-center">ADD EXAM</h5>
+    <hr>
+    <form method="POST" action="#">
+        {csrf_token}
+        <div class="row g-1">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label">ExaminationType</label>
+                    {{ form.examinationType  }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-1">
+            <div class="col">
+                <div class="form-outline">
+                    <label class="form-label">ExaminationName</label>
+                    {{ form.examinationName }}
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+{% endblock content%}
+
+
+
+
+
