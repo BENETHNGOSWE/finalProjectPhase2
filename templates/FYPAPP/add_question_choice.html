@@ -275,155 +275,108 @@ $(document).ready(function(){
 			<div class="table-title">
 				<div class="row">
 					<div class="col-sm-6">
-						<h2>Manage <b>Exam</b></h2>
+						<h2>Add <b>Question</b></h2>
 					</div>
 					<div class="col-sm-6">
 						<a href="#addCourseModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Module</span></a>
-						<a href="#deleteCourseModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
+						<a href="{% url 'FYPAPP:add_question' %}" class="btn btn-danger">Add Question</a>
+						<!-- <a href="#deleteCourseModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						 -->
 					</div>
 				</div>
 			</div>
 			<form method="POST" action="#">
-                {% csrf_token %}
-                <div class="row g-1">
-                    <div class="col">
-                      <!-- Name input -->
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
-                        <label class="form-label" for="form9Example1">Semeter</label>
-                        {{ form.semeter }}
-                      </div>
-                    </div>
-                    <div class="col">
-                    
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                        <label class="form-label" for="form9Example3">Course</label>
-                        {{ form.course }}
-                      </div>
-                    </div>
-
-                    <div class="col">
-                    
-                        <div class="form-outline">
-                          <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                          <label class="form-label" for="form9Example3">Module</label>
-                          {{ form.module }}
-                        </div>
-                      </div>
-                  </div>
-                  
-                  <hr />
-                  
-                  <!-- Gutter g-5 -->
-                  <div class="row g-5">
-                    <div class="col">
-                      <!-- Name input -->
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example3" name="questiontype" class="form-control" /> -->
-                        <label class="form-label" for="form9Example3">ExaminationType</label>
-                        {{ form.examinationType }}
-                        
-                      </div>
-                    </div>
-                    <div class="col">
-                      <!-- Email input -->
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example3" name="questionLevel" class="form-control" /> -->
-                        <label class="form-label" for="form9Example3">ExaminationName</label>
-                        {{ form.questionChoice }}
-                      </div>
-                    </div>
-                  </div>
-                  <br>
-                  <hr>
-                  
-
-
-				  <div class="row g-5">
-                  
-                    
-					<div class="col">
-						<table class="table">
-							<thead>
-							  <tr>
-								<th>Question</th>
-								<th>No of Question</th>
-								
-							  </tr>
-							</thead>
-							<tbody>
-								{% for cat in questionType %}
-									
-							  <tr>
-								<td>{{ cat.questionType }}</td>
-								<td>
-									<input type="number" id="idadiyamaswali" name="maswali" min="10" max="100">
-							    </td>
-								<!-- <td>{{cat.questionType2}}</td> -->
-								
-							  </tr>
-							  {% endfor %}
-							</tbody>
-						  </table>
-
+       			 {% csrf_token %}
+        <!-- {{ form }} -->
+                <!-- Gutter g-1 -->
+             <div class="row g-1">
+                 <div class="col">
+                   <!-- Name input -->
+                   <div class="form-outline">
+                     <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+                     <label class="form-label" for="form9Example1">Question</label>
+                     {{ form.question }}
+                   </div>
+                 </div>
+             	<hr>
+				<div class="col">
+					<!-- Name input -->
+					<div class="form-outline">
+					  <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+					  <label class="form-label" for="form9Example1">Option1</label>
+					  {{ form.option1 }}
 					</div>
-					
-                  </div>
-                  <hr>
-                  <div class="row g-1">
-                    <div class="col">
-                      <!-- Name input -->
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
-                        <label class="form-label" for="form9Example1">ExamDuration</label>
-                        {{ form.examDuration }}
-                      </div>
-                    </div>
-                    <div class="col">
-                    
-                      <div class="form-outline">
-                        <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                        <label class="form-label" for="form9Example3">ExamFullmark</label>
-                        {{ form.examFullmark }}
-                      </div>
-                    </div>
-
-                  </div>
-                  <hr>
-                  <div class="row g-5">
-                    
-                    <div class="col">
-                        <!-- Email input -->
-                        <div class="form-outline">
-                          <!-- <input type="text" id="form9Example3" name="questiontext" class="form-control" /> -->
-                          <label class="form-label" for="form9Example3">ExaminationDescription</label>
-                          {{ form.examinationDescription }}
-                        </div>
-                      </div>
-
-                      <div class="col">
-                    
-                        <div class="form-outline">
-                          <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                          <label class="form-label" for="form9Example3">QuestionSection</label>
-                          {{ form.questionSection }}
-                        </div>
-                      </div>
-                  </div>
-                  <div class="mt-5">
-					<button type="submit" class="btn btn-primary">Submit</button>
-					<button type="reset" class="btn btn-secondary ms-2">Reset</button>
-					
+				</div>	
+             	<hr>
+				 <div class="col">
+					<!-- Name input -->
+					<div class="form-outline">
+					  <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+					  <label class="form-label" for="form9Example1">Option2</label>
+					  {{ form.option2 }}
+					</div>
+				</div>	
+				<hr>
+				<div class="col">
+					<!-- Name input -->
+					<div class="form-outline">
+					  <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+					  <label class="form-label" for="form9Example1">Option3</label>
+					  {{ form.option3 }}
+					</div>
+				</div>	
+				<hr>
+				<div class="col">
+					<!-- Name input -->
+					<div class="form-outline">
+					  <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+					  <label class="form-label" for="form9Example1">Option4</label>
+					  {{ form.option4 }}
+					</div>
 				</div>
-            </form>
+				<hr>
+				<div class="col">
+					<!-- Name input -->
+					<div class="form-outline">
+					  <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+					  <label class="form-label" for="form9Example1">Answer</label>
+					  {{ form.answer }}
+					</div>
+				</div>	
+				<div class="mt-5">
+					<button class="btn btn-primary" type="submit">SUBMIT</button>
+
+				</div>
+                 
+                 </form>
+             		
+             		</div>
+             	</div>        
+             </div>
+
+<h1>ddddddddddd</h1>
+<table class="table">
+	<thead>
+	  <tr>
+		<th>Question</th>
 		
-		</div>
-	</div>        
-</div>
-
-
+	  </tr>
+	</thead>
+	<tbody>
+		{% for cat in category%}
+	  <tr>
+		<th scope="row">1</th>
+		<td>{{cat.question}}</td>
+		
+	  </tr>
+	  {% endfor %}
+	</tbody>
+  </table>
+{{category}}
+{% for cat in category %}
+	<div>{{cat.question}}</div>
+{% endfor %}			
 </body>
 </html>
 
 {% endblock content%} 
+

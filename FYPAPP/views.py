@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView
-from .models import Course, Masomo, Question
-from .forms import QuestionForm, CourseForm, MasomoForm
+from .models import Course, Masomo, Question,QuestionChoice
+from .forms import QuestionForm, CourseForm, MasomoForm, QuestionChoiceForm
+from django.db import connection
 
 
 # Create your views here.
@@ -29,7 +30,8 @@ def add_course(request):
 
     else:
         form = CourseForm()
-        return render(request, 'FYPAPP/add_course.html', {"form":form})     
+        return render(request, 'FYPAPP/add_course.html', {"form":form})    
+         
 def update_course(request, pk):
     course = Course.objects.get(id=pk)
     form = CourseForm(instance=course)
@@ -129,6 +131,40 @@ def delete_question(request, pk):
 
     context = {"question":question}
     return render(request, 'FYPAPP/question_manage.html', context)
+#   ****************************************************************
+def question_choice_manage(request):
+    context = {'question_choice': QuestionChoice.objects.all()}
+    return render(request, "FYPAPP/question_choice_manage.html", context)
+
+
+def add_question_choice(request):
+    if request.method == "POST":
+        form = QuestionChoiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('/choice')
+    else:
+        form = QuestionChoiceForm()
+        return render(request, "FYPAPP/add_question_choice.html", {'form':form})        
+
+def update_question_choice(request, pk):
+    question = QuestionChoice.objects.get(id=pk)
+    form = QuestionChoiceForm(instance=question)
+
+    if request.method == "POST":
+        form = QuestionChoiceForm(request.POST, instance=question)
+        if form.is_valid():
+            form.save()
+        return redirect('/choice')
+
+    context = {'form':form}
+    return render(request, 'FYPAPP/add_question_choice.html', context)
+
+def display(request):
+    category = QuestionChoice.objects.filter(category_id=1).only('question')
+    print(category)
+    print(connection.queries)
+    return render(request, "FYPAPP/add_question_choice.html", {'category':category})        
 
 
 

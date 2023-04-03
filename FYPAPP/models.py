@@ -58,7 +58,7 @@ class QuestionSection(models.Model):
 
 class QCategory(models.Model):
     questionType = models.CharField(max_length=30, null=True, blank=True, choices=questiontype)
-
+  
     def __str__(self):
         return self.questionType
 
@@ -74,6 +74,22 @@ class Question(models.Model):
     def __str__(self): 
         return self.questionText
 
+class QuestionChoice(models.Model):
+    question = models.CharField(max_length=100)
+    category = models.ForeignKey('QCategory', on_delete=models.CASCADE, null=True, blank=True)
+    option1 = models.CharField(max_length=100)
+    option2 = models.CharField(max_length=100)
+    option3 = models.CharField(max_length=100)
+    option4 = models.CharField(max_length=100)
+    answer = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.question
+
+class QuestionShortterm(models.Model):
+    category = models.ForeignKey('QCategory', on_delete=models.CASCADE, null=True, blank=True)
+    question = models.CharField(max_length=100)
+    answer = models.CharField(max_length=10)
 
 
 
@@ -87,23 +103,3 @@ class Question(models.Model):
 
 
 
-
-
-#         <div class="container card p-3 mt-5 border-dark" style="width: 95%;">
-# 	<table>
-# 		<thead>
-# 			<tr>
-# 				<th>Maswali</th>
-# 				<th>Ainayaswali</th>
-# 			</tr>
-# 		</thead>
-
-# 		{% for data in question %}
-# 		<tr>
-# 			<td>{{data.Maswali}}</td>
-# 			<td>{{data.Ainayaswali}}</td>
-# 		</tr>
-# 		{% endfor %}
-# 	</table>
-
-# </div>

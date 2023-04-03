@@ -1,5 +1,5 @@
 from django.db import models
-from FYPAPP.models import Masomo, Course, QuestionSection
+from FYPAPP.models import Masomo, Course, QuestionSection, QCategory, QuestionChoice
 # Create your models here.
 class Exam(models.Model):
     examinationType = models.CharField(max_length=30)
@@ -7,6 +7,8 @@ class Exam(models.Model):
     semeter = models.IntegerField()
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     module = models.ForeignKey(Masomo, on_delete=models.CASCADE)
+    questionChoice = models.ForeignKey(QuestionChoice, on_delete=models.CASCADE, null=True, blank=True)
+    # choice = models.ForeignKey(QuestionAinazote, on_delete=models.CASCADE, null=True, blank=True)
     examDuration = models.TimeField()
     examFullmark = models.IntegerField ()
     questionSection = models.ForeignKey(QuestionSection, on_delete=models.CASCADE)
@@ -14,3 +16,4 @@ class Exam(models.Model):
 
     # def __str__(self):
     #     return self.examDuration
+

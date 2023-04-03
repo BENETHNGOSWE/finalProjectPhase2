@@ -10,6 +10,8 @@ urlpatterns = [
 
 
     path('addcourse/', views.add_course, name='add_course'),
+    path('display/', views.display, name='display'),
+
     path('coursedata/', views.course_manage, name='course_manage'),
     path('updatecourse/<str:pk>/', views.update_course, name="update_course"),
     path('deletecourse/<str:pk>/', views.delete_course, name="delete_course"),
@@ -18,8 +20,9 @@ urlpatterns = [
     path('moduledata/', views.module_manage, name='module_manage'),
     path('updatemodule/<str:pk>/', views.update_module, name="update_module"), 
 
-    # path('addmodule/', views.add_module, name="add_module"),
-    # path('moduledata/', views.module_manage, name="module_manage"),
+    path('addquestionchoice/', views.add_question_choice, name="add_question_choice"),
+    path('choice/', views.question_choice_manage, name="question_choice_manage"),
+    path('updatequestionchoice/<str:pk>/', views.update_question_choice, name="update_question_choice"),
     # path('updatemodule/', views.update_module, name="update_module"),
    
 
