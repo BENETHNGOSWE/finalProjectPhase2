@@ -1,48 +1,119 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Exam
 from .forms import ExamForm
-from FYPAPP.models import QCategory, QuestionChoice
+from FYPAPP.models import QCategory, QuestionChoice, QuestionShortterm, QuestionLongTerm
 from FYPAPP.forms import QCategoryForm, QuestionChoiceForm
 from django.db import connection
-# Create your views here
+import random
+from .pdf import html_to_pdf 
+from django.views.generic import View
+from django.http import HttpResponse
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 
-# def exam(request):
-#     categories = Category.objects.all()
-#     questions = []
-#     for category in categories:
-#         category_questions = Question.objects.filter(category=category).order_by('?')[:2]  # select 5 random questions from each category
-#         questions.extend(list(category_questions))
-#     random.shuffle(questions) 
+
+
+
+
+def GeneratePdf(request):
+    # Render the HTML template to a PDF
+    template = get_template('mtihani/generate_exam.html')
+    html = template.render()
+    response = BytesIO()
+    pdf = pisa.CreatePDF(html, dest=response)
     
-#      # shuffle the list of questions
-#     return render(request, 'generate_exam.html', {'questions': questions})  
+    # Return the PDF as a response
+    if pdf.err:
+        return HttpResponse('Error generating PDF')
+    response.seek(0)
+    return HttpResponse(response, content_type='application/pdf')
+
+# def GeneratePdf(request, *args, **kwargs):
+#     # getting the template
+#     pdf = html_to_pdf('mtihani/generate_exam.html')
+   
+#     # rendering the template
+#     return HttpResponse(pdf, content_type='application/pdf')
+# def GeneratePdf(request, *args, **kwargs):
+#     question = QuestionChoice.objects.all()
+#     context = {
+#         'question': question
+#     }
+#     pdf = html_to_pdf('mtihani/generate_exam.html', context)
+#     return HttpResponse(pdf, content_type='application/pdf')
+
+
+
+
+# class GeneratePdf(View):
+#     def get(self, request, *args, **kwargs):
+         
+#         # getting the template
+#         pdf = html_to_pdf('generate_exam.html')
+         
+#          # rendering the template
+#         return HttpResponse(pdf, content_type='application/pdf')
+# Create your views here
 
 def exam_manage(request):
     context = {'exam_manage': Exam.objects.all()}
-    context = {'question_choice': QuestionChoice.objects.all()}
+    context2 = {'question_choice': QuestionChoice.objects.all()}
     return render(request, "mtihani/exam_manage.html", context)
 
-def add_exam(request):
-    # chaguamaswali = input("chagua")
-    questionType = QCategory.objects.defer('questionType')
-    # option
-    # QuestionType = QCategory.objects.all()
-    # questionType = QCategory.objects.filter(id=2).only('questionType')
+# def add_exam(request):
+#     # chaguamaswali = input("chagua")
+#     questionType = QCategory.objects.defer('questionType')
+#     # option
+#     # QuestionType = QCategory.objects.all()
+#     # questionType = QCategory.objects.filter(id=2).only('questionType')
 
+#     if request.method == "POST":
+#         form = ExamForm(request.POST) 
+#         form2 = QuestionChoiceForm(request.POST) 
+#         if form.is_valid():
+#             form.save()
+#         return redirect('/exam')  
+
+#     else:
+#         form = ExamForm()
+#         form2 = QuestionChoiceForm()
+#         context = {"form":form, "form2":form2, "questionType":questionType}
+#         return render(request, "mtihani/add_exam.html", context)
+
+
+def add_exam(request):
     if request.method == "POST":
-        form = ExamForm(request.POST) 
-        form2 = QuestionChoiceForm(request.POST) 
+        form = ExamForm(request.POST)
         if form.is_valid():
             form.save()
+
+            num_questions = int(request.POST.get('num_questions'))
+            questions = list(QuestionChoice.objects.all())
+            random.shuffle(questions)
+            questions = questions[:num_questions]
+            # questions.save()
+
+            questionshort = list(QuestionShortterm.objects.all())
+            random.shuffle(questionshort)
+            questionshort = questionshort[:num_questions]
+            # questionshort.save()
+
+        
+            # questionlong = list(QuestionLongTerm.objects.all())
+            # return redirect('/exam')
         return redirect('/exam')  
 
     else:
-        form = ExamForm()
-        form2 = QuestionChoiceForm()
-        context = {"form":form, "form2":form2, "questionType":questionType}
-        return render(request, "mtihani/add_exam.html", context)
+            form = ExamForm()
+            return render(request, "mtihani/add_exam.html", {"form":form})     
 
-    
+
+
+
+
+
+
 
 def update_exam(request, pk):
     mtihani = Exam.objects.get(id=pk)
@@ -82,3 +153,66 @@ def generate_exam(request):
     # Render the exam template with the selected questions
     context = {'questions': questions}
     return render(request, 'mtihani/add_exam.html', context)
+
+
+
+
+
+def select_questions(request):
+    form = ExamForm(request.POST)
+    # multiplechoice question algorithms
+    if request.method == 'POST':
+        num_questions = int(request.POST.get('num_questions'))
+        questions = list(QuestionChoice.objects.all())
+        random.shuffle(questions)
+        questions = questions[:num_questions]
+
+
+        # short question algorithms
+        num_shortquestions = int(request.POST.get('num_shortquestions'))
+        questionshort = list(QuestionShortterm.objects.all())
+        random.shuffle(questionshort)
+        questionshort = questionshort[:num_shortquestions]
+        
+        # long question algorithms
+        num_longquestions = int(request.POST.get('num_longquestions'))
+        questionlong = list(QuestionLongTerm.objects.all())
+        random.shuffle(questionlong)
+        questionlong = questionlong[:num_longquestions]
+
+        context = {
+            'questions':questions,
+            'questionshort':questionshort,
+            'questionlong':questionlong,
+
+        }
+        # pass the selected questions to the template
+        return render(request, "mtihani/generate_exam.html", context)
+    else:
+        form = ExamForm()
+        return render(request, 'mtihani/add_exam.html', {"form":form})
+
+
+# def add_exam(request):
+#     if request.method == "POST":
+#         form = ExamForm(request.POST)
+#         if form.is_valid():
+#             exam = form.save()
+#             num_questions = int(request.POST.get('num_questions'))
+#             questions = list(QuestionChoice.objects.all())
+#             random.shuffle(questions)
+#             questions = questions[:num_questions]
+#             questionshort = list(QuestionShortterm.objects.all())
+#             random.shuffle(questionshort)
+#             questionshort = questionshort[:num_questions]
+#             return redirect('/exam')
+#             # return render(request, "mtihani/exam_manage.html", {  })
+#     else:
+       
+#         context = {
+#             'form':form,
+#             'exam': exam,
+#             'questions': questions,
+#             'questionshort': questionshort
+#         }
+#     return render(request, "mtihani/add_exam.html", context)

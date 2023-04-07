@@ -320,7 +320,49 @@ $(document).ready(function(){
 						<td>{{ exam.examinationDescription }}</td>  -->
                     </tr>
                     {% endfor %}
-                
+					<br>
+					<table>
+						<thead>
+							<tr>
+							<th>Maswali</th>
+							<th>type</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for que in questions %}
+						
+							<tr>
+								<td>{{ que.question }}</td>
+								<td>{{ que.category }}</td>
+							</tr>
+							{% endfor %}
+							
+						</tbody>
+					</table>
+					<hr>
+
+					<table>
+						<thead>
+							<tr>
+							<th>Maswali</th>
+							<th>type</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for que in questionshort %}
+						
+							<tr>
+								<td>{{ que.question }}</td>
+								<td>{{ que.category }}</td>
+							</tr>
+							{% endfor %}
+							
+						</tbody>
+					</table>
+					<!-- {% for que in questions %}
+   						 <p>{{ que.question }}</p>
+					{% endfor %}
+                 -->
 			</table>
 		
 		</div>

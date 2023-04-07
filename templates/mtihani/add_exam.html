@@ -331,7 +331,7 @@ $(document).ready(function(){
                       <div class="form-outline">
                         <!-- <input type="text" id="form9Example3" name="questionLevel" class="form-control" /> -->
                         <label class="form-label" for="form9Example3">ExaminationName</label>
-                        {{ form.questionChoice }}
+                        {{ form.examinationName }}
                       </div>
                     </div>
                   </div>
@@ -344,29 +344,23 @@ $(document).ready(function(){
                   
                     
 					<div class="col">
-						<table class="table">
-							<thead>
-							  <tr>
-								<th>Question</th>
-								<th>No of Question</th>
-								
-							  </tr>
-							</thead>
-							<tbody>
-								{% for cat in questionType %}
-									
-							  <tr>
-								<td>{{ cat.questionType }}</td>
-								<td>
-									<input type="number" id="idadiyamaswali" name="maswali" min="10" max="100">
-							    </td>
-								<!-- <td>{{cat.questionType2}}</td> -->
-								
-							  </tr>
-							  {% endfor %}
-							</tbody>
-						  </table>
+						<label for="num_questions">Number of questions:</label>
+  						<input type="number" name="num_questions" id="num_questions">
+  						<!-- <button type="submit">Select</button> -->
 
+					</div>
+				
+					<div class="col">
+						<label for="num_shortquestions">Number of questionsshort:</label>
+  						<input type="number" name="num_shortquestions" id="num_shortquestions">
+  						<!-- <button type="submit">Select</button> -->
+
+					</div>
+
+					<div class="col">
+						<label for="num_longquestions">Number of questionlong:</label>
+						<input type="number" name="num_longquestions" id="num_longquestions">
+						
 					</div>
 					
                   </div>

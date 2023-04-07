@@ -92,6 +92,14 @@ class QuestionShortterm(models.Model):
     answer = models.CharField(max_length=10)
 
 
+class QuestionLongTerm(models.Model):
+    category = models.ForeignKey('QCategory', on_delete=models.CASCADE)
+    question = models.TextField ()
+    answer = models.TextField ()
+
+
+
+
 
 
 
