@@ -1,0 +1,17 @@
+{% extends 'base.html'%}
+
+{% block title%}
+Exam
+{% endblock title%}
+
+
+{% block content %}
+    {% for exam in object_list%}
+    {{exam.exam}}
+    <br>
+    <a href="{% url 'mtihani:examrender' exam.pk %}"><button class="btn btn-primary">PDF Generate</button></a>
+    <br>
+    <hr>
+    {% endfor %}
+
+{% endblock content %}

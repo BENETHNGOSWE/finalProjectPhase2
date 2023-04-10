@@ -1,0 +1,12 @@
+
+
+{% block content %}
+    <h1>Saved Exams</h1>
+    <ul>
+    {% for exam in exams %}
+        <li>Exam {{ exam.id }}: {{ exam.timestamp }}</li>
+    {% empty %}
+        <li>No saved exams</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

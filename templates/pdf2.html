@@ -1,0 +1,38 @@
+<!-- <html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        {{exam}}
+        <hr>
+        {{exam.questionChoice}}
+         {{exam.questionChoice}}
+        {{exam.questionLong}} -->
+    <!-- </body> -->
+<!-- </html> -->
+
+
+ <!-- result.html -->
+<h1>Generated Questions</h1>
+
+<h2>Multiple-choice questions</h2>
+{% for question in questions %}
+<p>{{ question.question }}</p>
+<ul>
+{% for choice in question.choices.all %}
+  <li>{{ choice.option1 }}</li>
+{% endfor %}
+</ul>
+{% endfor %}
+
+<h2>Short-answer questions</h2>
+{% for question in questionshort %}
+<p>{{ question.question }}</p>
+{% endfor %}
+
+<h2>Long-answer questions</h2>
+{% for question in questionlong %}
+<p>{{ question.question }}</p>
+{% endfor %}
+
+

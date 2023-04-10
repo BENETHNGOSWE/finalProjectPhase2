@@ -1,0 +1,52 @@
+{% extends 'mtihani/home.html' %}
+
+{% block content %}
+
+
+			<form method="POST" action="#">
+                {% csrf_token %}
+                
+                  
+             		  <div class="row g-5">
+                  
+                    
+					<div class="col">
+						<label for="num_questions">Number of questions:</label>
+  						<input type="number" name="num_questions" id="num_questions">
+  						<!-- <button type="submit">Select</button> -->
+
+					</div>
+				
+					<div class="col">
+						<label for="num_shortquestions">Number of questionsshort:</label>
+  						<input type="number" name="num_shortquestions" id="num_shortquestions">
+  						<!-- <button type="submit">Select</button> -->
+
+					</div>
+
+					<div class="col">
+						<label for="num_longquestions">Number of questionlong:</label>
+						<input type="number" name="num_longquestions" id="num_longquestions">
+						
+					</div>
+					
+                  </div>
+                  <hr>
+                     
+                  <div class="mt-5">
+					<button type="submit" class="btn btn-primary">Submit</button>
+					<button type="reset" class="btn btn-secondary ms-2">Reset</button>
+					<a href="{% url 'mtihani:GeneratePdf' %}" class="btn btn-primary">Print Examination</a>
+					
+				</div>
+            </form>
+		
+		</div>
+	</div>        
+</div>
+
+
+</body>
+</html>
+
+{% endblock content%} 

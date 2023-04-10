@@ -337,33 +337,44 @@ $(document).ready(function(){
                   </div>
                   <br>
                   <hr>
-                  
 
-
-				  <div class="row g-5">
-                  
-                    
-					<div class="col">
+				  <div class="row g-1">
+                    <div class="col">
+                      <!-- Name input -->
+                      <div class="form-outline">
 						<label for="num_questions">Number of questions:</label>
   						<input type="number" name="num_questions" id="num_questions">
-  						<!-- <button type="submit">Select</button> -->
-
-					</div>
-				
-					<div class="col">
+                        <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
+                        <!-- <label class="form-label" for="form9Example1">questionChoice</label> -->
+                        <!-- {{ form.questionChoice }} -->
+                      </div>
+                    </div>
+                    <div class="col">
+                    
+                      <div class="form-outline">
 						<label for="num_shortquestions">Number of questionsshort:</label>
   						<input type="number" name="num_shortquestions" id="num_shortquestions">
-  						<!-- <button type="submit">Select</button> -->
+                        <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
+                        <!-- <label class="form-label" for="form9Example3">questionShort</label> -->
+                        <!-- {{ form.questionChoice }} -->
+                      </div>
+                    </div>
 
-					</div>
-
-					<div class="col">
-						<label for="num_longquestions">Number of questionlong:</label>
-						<input type="number" name="num_longquestions" id="num_longquestions">
-						
-					</div>
-					
+                    <div class="col">
+                    
+                        <div class="form-outline">
+							<label for="num_longquestions">Number of questionlong:</label>
+						    <input type="number" name="num_longquestions" id="num_longquestions">
+                          <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
+                          <!-- <label class="form-label" for="form9Example3">questionLong</label> -->
+                            {{ form.questionLong }}
+                        </div>
+                      </div>
                   </div>
+                  
+
+
+				  
                   <hr>
                   <div class="row g-1">
                     <div class="col">

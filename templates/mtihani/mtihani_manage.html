@@ -277,54 +277,67 @@ $(document).ready(function(){
 					<div class="col-sm-6">
 						<h2>Manage <b>Exam</b></h2>
 					</div>
-					<div class="col-sm-6">
-						<a href="#addCourseModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Module</span></a>
-						<a href="#deleteCourseModal" class="btn btn-danger" data-toggle="modal"><i class="material-icons">&#xE15C;</i> <span>Delete</span></a>						
-					</div>
+					
 				</div>
 			</div>
 			<table class="table table-striped table-hover">
                 
                     <thead>
                         <tr>
-                            <!-- <th>examinationType</th> -->
-                            <th>examinationName</th>
-                            <th>questionLong</th> 
-							<th>Generate Exam</th>
-                           
+                          
+                            <th>Question</th>
+                            <th>Category</th>
+                            <!-- <th>module</th> -->
                         </tr>
                     </thead>
-                    {% for exam in exam_manage %}
+                    {% for que in questionshort %}
                     <tr>
-                       
-                        <td>{{ exam.examinationName }}</td>
-                        <td>{{ exam.questionLong }}</td>
-						<td>
-							<!-- <button class="btn btn-primary">Generate Exam</button> -->
-							<a href="{% url 'mtihani:select_questions' %}" class="btn btn-primary">Generate Exam</a>
-						</td>
-						<!-- <td>{{ exam.module }}</td>  -->
-                    	<td>
-							<div class="container-fluid">
-								<div class="row">
-									<div class="col-6">
-										<a href="{% url 'mtihani:update_exam' exam.id %}" class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</a>
-									</div>
-	
-									<div class="col-6">
-										<!-- <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a> -->
-										<a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-									</div>
-									
-								</div>
-							</div>
-						</td>
-                          
-						
+                        
+                        <td>{{que.question }}</td>
+                        <td>{{que.category}}</td>
                     </tr>
                     {% endfor %}
-			
-			</table>
+					<br>
+            </table>
+			    <table  class="table table-striped table-hover">
+						<thead>
+							<tr>
+							<th>Maswali</th>
+							<th>type</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for que in questions %}
+						
+							<tr>
+								<td>{{ que.question }}</td>
+								<td>{{ que.category }}</td>
+							</tr>
+							{% endfor %}
+							
+						</tbody>
+					</table>
+	
+
+					<table  class="table table-striped table-hover">
+						<thead>
+							<tr>
+							<th>Maswali</th>
+							<th>type</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for que in questionlong %}
+						
+							<tr>
+								<td>{{ que.question }}</td>
+								<td>{{ que.category }}</td>
+							</tr>
+							{% endfor %}
+							
+						</tbody>
+					</table>
+				<a href="{% url 'mtihani:GeneratePdf' %}" class="btn btn-primary">Print Examination</a>
 		
 		</div>
 	</div>        

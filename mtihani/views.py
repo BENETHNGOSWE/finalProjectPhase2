@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Exam
-from .forms import ExamForm
+from .models import Exam, ExamQuestion
+from .forms import ExamForm, ExamQuestionForm
 from FYPAPP.models import QCategory, QuestionChoice, QuestionShortterm, QuestionLongTerm
 from FYPAPP.forms import QCategoryForm, QuestionChoiceForm
 from django.db import connection
@@ -11,6 +11,9 @@ from django.http import HttpResponse
 from io import BytesIO
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.views.generic import ListView
+from django.template.loader import render_to_string
+from weasyprint import HTML
 
 
 
@@ -29,57 +32,59 @@ def GeneratePdf(request):
     response.seek(0)
     return HttpResponse(response, content_type='application/pdf')
 
-# def GeneratePdf(request, *args, **kwargs):
-#     # getting the template
-#     pdf = html_to_pdf('mtihani/generate_exam.html')
-   
-#     # rendering the template
-#     return HttpResponse(pdf, content_type='application/pdf')
-# def GeneratePdf(request, *args, **kwargs):
-#     question = QuestionChoice.objects.all()
-#     context = {
-#         'question': question
-#     }
-#     pdf = html_to_pdf('mtihani/generate_exam.html', context)
-#     return HttpResponse(pdf, content_type='application/pdf')
+class ExamListView(ListView):
+    model = Exam
+    template_name = 'main.html'
+
+
+def exam_render_pdf(request, *args, **kwargs):
+    pk = kwargs.get('pk')
+    exam = get_object_or_404(QuestionChoice, pk=pk)
+
+    template_path = 'pdf2.html'
+    context = {'exam': exam}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
 
 
 
+def render_pdf_view(request):
+    template_path = 'pdf1.html'
+    context = {'myvar': 'this is your template context'}
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
 
-# class GeneratePdf(View):
-#     def get(self, request, *args, **kwargs):
-         
-#         # getting the template
-#         pdf = html_to_pdf('generate_exam.html')
-         
-#          # rendering the template
-#         return HttpResponse(pdf, content_type='application/pdf')
-# Create your views here
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+
+
 
 def exam_manage(request):
     context = {'exam_manage': Exam.objects.all()}
     context2 = {'question_choice': QuestionChoice.objects.all()}
     return render(request, "mtihani/exam_manage.html", context)
 
-# def add_exam(request):
-#     # chaguamaswali = input("chagua")
-#     questionType = QCategory.objects.defer('questionType')
-#     # option
-#     # QuestionType = QCategory.objects.all()
-#     # questionType = QCategory.objects.filter(id=2).only('questionType')
-
-#     if request.method == "POST":
-#         form = ExamForm(request.POST) 
-#         form2 = QuestionChoiceForm(request.POST) 
-#         if form.is_valid():
-#             form.save()
-#         return redirect('/exam')  
-
-#     else:
-#         form = ExamForm()
-#         form2 = QuestionChoiceForm()
-#         context = {"form":form, "form2":form2, "questionType":questionType}
-#         return render(request, "mtihani/add_exam.html", context)
 
 
 def add_exam(request):
@@ -88,20 +93,9 @@ def add_exam(request):
         if form.is_valid():
             form.save()
 
-            num_questions = int(request.POST.get('num_questions'))
-            questions = list(QuestionChoice.objects.all())
-            random.shuffle(questions)
-            questions = questions[:num_questions]
-            # questions.save()
 
-            questionshort = list(QuestionShortterm.objects.all())
-            random.shuffle(questionshort)
-            questionshort = questionshort[:num_questions]
-            # questionshort.save()
 
-        
-            # questionlong = list(QuestionLongTerm.objects.all())
-            # return redirect('/exam')
+            
         return redirect('/exam')  
 
     else:
@@ -130,67 +124,45 @@ def update_exam(request, pk):
 
     
 
-def generate_exam(request):
-    # Get the number of questions per category from the request
-    num_categories = request.POST.get('num_categories')
-    num_questions_per_category = request.POST.get('num_questions_per_category')
-
-    # Get a list of categories
-    categories = QCategory.objects.all()
-
-    # Create an empty list to store the selected questions
-    questions = []
-
-    # Select the specified number of questions randomly from each category
-    for category in categories:
-        category_questions = Question.objects.filter(category=category)
-        random_questions = random.sample(list(category_questions), num_questions_per_category)
-        questions.extend(random_questions)
-
-    # Shuffle the questions randomly
-    random.shuffle(questions)
-
-    # Render the exam template with the selected questions
-    context = {'questions': questions}
-    return render(request, 'mtihani/add_exam.html', context)
+# def select_questions(request):
+#     if request.method == "POST":
+#         form = ExamForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#     # form = ExamForm(request.POST)
+#     # multiplechoice question algorithms
+#     # if request.method == 'POST':
+#         num_questions = int(request.POST.get('num_questions'))
+#         questions = list(QuestionChoice.objects.all())
+#         random.shuffle(questions)
+#         questions = questions[:num_questions]
 
 
-
-
-
-def select_questions(request):
-    form = ExamForm(request.POST)
-    # multiplechoice question algorithms
-    if request.method == 'POST':
-        num_questions = int(request.POST.get('num_questions'))
-        questions = list(QuestionChoice.objects.all())
-        random.shuffle(questions)
-        questions = questions[:num_questions]
-
-
-        # short question algorithms
-        num_shortquestions = int(request.POST.get('num_shortquestions'))
-        questionshort = list(QuestionShortterm.objects.all())
-        random.shuffle(questionshort)
-        questionshort = questionshort[:num_shortquestions]
+#         # short question algorithms
+#         num_shortquestions = int(request.POST.get('num_shortquestions'))
+#         questionshort = list(QuestionShortterm.objects.all())
+#         random.shuffle(questionshort)
+#         questionshort = questionshort[:num_shortquestions]
         
-        # long question algorithms
-        num_longquestions = int(request.POST.get('num_longquestions'))
-        questionlong = list(QuestionLongTerm.objects.all())
-        random.shuffle(questionlong)
-        questionlong = questionlong[:num_longquestions]
+#         # long question algorithms
+#         num_longquestions = int(request.POST.get('num_longquestions'))
+#         questionlong = list(QuestionLongTerm.objects.all())
+#         random.shuffle(questionlong)
+#         questionlong = questionlong[:num_longquestions]
+#         context = {
+#             'questions':questions,
+#             'questionshort':questionshort,
+#             'questionlong':questionlong,
 
-        context = {
-            'questions':questions,
-            'questionshort':questionshort,
-            'questionlong':questionlong,
-
-        }
-        # pass the selected questions to the template
-        return render(request, "mtihani/generate_exam.html", context)
-    else:
-        form = ExamForm()
-        return render(request, 'mtihani/add_exam.html', {"form":form})
+#         }
+       
+      
+#         return render(request, "mtihani/generate_exam.html", context)
+#     else:
+       
+#         # return render(request, "mtihani/generate_exam.html", context)
+#         form = ExamForm()
+#         return render(request, 'mtihani/add_exam.html', {"form":form})
 
 
 # def add_exam(request):
@@ -216,3 +188,153 @@ def select_questions(request):
 #             'questionshort': questionshort
 #         }
 #     return render(request, "mtihani/add_exam.html", context)
+
+
+
+
+# def select_questions(request):
+#     if request.method == 'POST':
+#         num_questions = int(request.POST.get('num_questions'))
+#         questions = list(QuestionChoice.objects.all())
+#         random.shuffle(questions)
+#         questions = questions[:num_questions]
+#         for question in questions:
+#             question.save()
+
+#         num_shortquestions = int(request.POST.get('num_shortquestions'))
+#         questionshort = list(QuestionShortterm.objects.all())
+#         random.shuffle(questionshort)
+#         questionshort = questionshort[:num_shortquestions]
+#         for question in questionshort:
+#             question.save()
+
+#         num_longquestions = int(request.POST.get('num_longquestions'))
+#         questionlong = list(QuestionLongTerm.objects.all())
+#         random.shuffle(questionlong)
+#         questionlong = questionlong[:num_longquestions]
+#         for question in questionlong:
+#             question.save()
+
+#         context = {
+#             'questions':questions,
+#             'questionshort':questionshort,
+#             'questionlong':questionlong,
+
+#         }
+       
+#         # return redirect('/matokeo')
+#         return render(request, "mtihani/generate_exam.html", context)
+
+       
+#     else:
+#         # form = QCategoryForm()
+#         return render(request, 'mtihani/mtihani.html')
+
+# def select_questions(request):
+#     if request.method == 'POST':
+#         # Retrieve the number of questions to select for each category
+#         num_questions = int(request.POST.get('num_questions'))
+#         num_shortquestions = int(request.POST.get('num_shortquestions'))
+#         num_longquestions = int(request.POST.get('num_longquestions'))
+
+#         # Create a new exam instance
+#         exam = Exam.objects.create()
+
+#         # Retrieve a random selection of questions from each category
+#         questions = list(QuestionChoice.objects.order_by('?')[:num_questions])
+#         questionshort = list(QuestionShortterm.objects.order_by('?')[:num_shortquestions])
+#         questionlong = list(QuestionLongTerm.objects.order_by('?')[:num_longquestions])
+
+#         # Add the selected questions to the exam
+#         for question in questions:
+#             exam_question = ExamQuestion.objects.create(exam=exam, question_choice=question)
+#         for question in questionshort:
+#             exam_question = ExamQuestion.objects.create(exam=exam, question_shortterm=question)
+#         for question in questionlong:
+#             exam_question = ExamQuestion.objects.create(exam=exam, question_longterm=question)
+
+#         # Retrieve all ExamQuestion instances that belong to the new exam
+#         exam_questions = ExamQuestion.objects.filter(exam=exam)
+
+#         # Pass the exam_questions to the results template
+#         context = {'exam_questions': exam_questions}
+#         return render(request, 'mtihani/mtihani_manage.html', context)
+
+#     else:
+#         return render(request, 'mtihani/mtihani.html')
+
+
+
+
+
+
+
+
+def mtihani_manage(request):
+    context = {'questions': QuestionChoice.objects.all()}
+    context2 = {'questionshort': QuestionShortterm.objects.all()}
+    context3 = {'questionlong': QuestionLongTerm.objects.all()}
+    return render(request, 'mtihani/mtihani_manage.html', {'context':context, 'context2':context2,'context3':context3})
+
+
+def view_saved_questions(request):
+    saved_questions = {
+        'questions': QuestionChoice.objects.all(),
+        'questionshort': QuestionShortterm.objects.all(),
+        'questionlong': QuestionLongTerm.objects.all()
+    }
+    return render(request,'mtihani/mtihani_manage.html', saved_questions)    
+
+class select_questions(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'pdf1.html')
+    
+    def post(self, request, *args, **kwargs):
+        # Retrieve num_questions, num_shortquestions, and num_longquestions values from POST request
+        num_questions = int(request.POST.get('num_questions'))
+        num_shortquestions = int(request.POST.get('num_shortquestions'))
+        num_longquestions = int(request.POST.get('num_longquestions'))
+        
+        # Retrieve questions from database and shuffle them
+        questions = list(QuestionChoice.objects.all())
+        random.shuffle(questions)
+        
+        questionshort = list(QuestionShortterm.objects.all())
+        random.shuffle(questionshort)
+        
+        questionlong = list(QuestionLongTerm.objects.all())
+        random.shuffle(questionlong)
+        
+        # Save only the required number of questions
+        questions = questions[:num_questions]
+        for question in questions:
+            question.save()
+        
+        questionshort = questionshort[:num_shortquestions]
+        for question in questionshort:
+            question.save()
+        
+        questionlong = questionlong[:num_longquestions]
+        for question in questionlong:
+            question.save()
+        
+        # Create a context containing the questions
+        context = {
+            'num_questions': num_questions,
+            'num_shortquestions': num_shortquestions,
+            'num_longquestions': num_longquestions,
+            'questions': questions,
+            'questionshort': questionshort,
+            'questionlong': questionlong,
+        }
+        
+        # Render the HTML template with the context
+        html = render_to_string('pdf2.html', {'questions': questions, 'questionshort': questionshort, 'questionlong': questionlong})
+        response = HttpResponse(content_type='application/pdf')
+        response['Content-Disposition'] = 'filename="questions.pdf"'
+        buffer = BytesIO()
+        HTML(string=html).write_pdf(buffer)
+        response.write(buffer.getvalue())
+
+        # Return the PDF as an HTTP response
+        return response
