@@ -1,5 +1,6 @@
 from django.db import models
 from FYPAPP.models import Masomo, Course, QuestionSection, QCategory, QuestionChoice, QuestionShortterm,QuestionLongTerm
+import datetime
 # Create your models here.
 class Exam(models.Model):
     examinationType = models.CharField(max_length=30,  null=True, blank=True)
@@ -24,8 +25,17 @@ class SavedExam(models.Model):
 
 
 
-class ExamQuestion(models.Model):
-    exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
-    question_choice = models.ForeignKey(QuestionChoice, on_delete=models.CASCADE, null=True, blank=True)
-    question_shortterm = models.ForeignKey(QuestionShortterm, on_delete=models.CASCADE, null=True, blank=True)
-    question_longterm = models.ForeignKey(QuestionLongTerm, on_delete=models.CASCADE, null=True, blank=True)
+class Mtihani(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE,  null=True, blank=True)
+    module = models.ForeignKey(Masomo, on_delete=models.CASCADE,  null=True, blank=True)
+    modulecode = models.CharField(max_length=50, null=True, blank=True)
+    semeter = models.CharField(max_length=50, null=True, blank=True)
+    exam_name = models.CharField(max_length=50)
+    examdate = models.DateField(null=True)
+    examtime = models.CharField(max_length=50, null=True, blank=True)
+    examinationDescription = models.CharField(max_length=300, null=True, blank=True)
+    examinationDescription2 = models.CharField(max_length=300, null=True, blank=True)
+    examinationDescription3 = models.CharField(max_length=300, null=True, blank=True)
+    num_questions = models.IntegerField()
+    num_shortquestions = models.IntegerField()
+    num_longquestions = models.IntegerField()

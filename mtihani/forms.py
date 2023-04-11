@@ -1,5 +1,5 @@
 from django import forms
-from .models import Exam, ExamQuestion
+from .models import Exam,Mtihani
 
 class ExamForm(forms.ModelForm):
     class Meta:
@@ -8,7 +8,8 @@ class ExamForm(forms.ModelForm):
 
 
 
-class ExamQuestionForm(forms.ModelForm):
+class MtihaniForm(forms.ModelForm):
+    # examdate = forms.DateField(input_formats=settings.DATE_INPUT_FORMATS)
     class Meta:
-        model = ExamQuestion
+        model = Mtihani
         fields = '__all__'        

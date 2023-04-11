@@ -288,17 +288,17 @@ $(document).ready(function(){
                     <thead>
                         <tr>
                             <!-- <th>examinationType</th> -->
-                            <th>examinationName</th>
-                            <th>questionLong</th> 
-							<th>Generate Exam</th>
+                            <th>course</th>
+                            <th>semeter</th> 
+							<!-- <th>Generate Exam</th> -->
                            
                         </tr>
                     </thead>
                     {% for exam in exam_manage %}
                     <tr>
                        
-                        <td>{{ exam.examinationName }}</td>
-                        <td>{{ exam.questionLong }}</td>
+                        <td>{{ exam.course }}</td>
+                        <td>{{ exam.semeter }}</td>
 						<td>
 							<!-- <button class="btn btn-primary">Generate Exam</button> -->
 							<a href="{% url 'mtihani:select_questions' %}" class="btn btn-primary">Generate Exam</a>

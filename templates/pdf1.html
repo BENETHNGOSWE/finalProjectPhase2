@@ -10,8 +10,12 @@
 
 
 <!-- question.html -->
+
+{% block content %}
+
 <form method="post" action="{% url 'mtihani:select_questions' %}">
     {% csrf_token %}
+    
     <label for="num_questions">Number of multiple-choice questions:</label>
     <input type="number" name="num_questions" id="num_questions" required><br><br>
     
@@ -23,4 +27,4 @@
     
     <button type="submit">Generate Questions</button>
   </form>
-  
+{% endblock content %}  

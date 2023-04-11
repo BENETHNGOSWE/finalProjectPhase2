@@ -283,7 +283,7 @@ $(document).ready(function(){
 					</div>
 				</div>
 			</div>
-			<form method="POST" action="#">
+			<form method="POST" action="{% url 'mtihani:select_questions' %}">
                 {% csrf_token %}
                 <div class="row g-1">
                     <div class="col">
@@ -342,32 +342,23 @@ $(document).ready(function(){
                     <div class="col">
                       <!-- Name input -->
                       <div class="form-outline">
-						<label for="num_questions">Number of questions:</label>
-  						<input type="number" name="num_questions" id="num_questions">
-                        <!-- <input type="text" id="form9Example1" name="somo" class="form-control" /> -->
-                        <!-- <label class="form-label" for="form9Example1">questionChoice</label> -->
-                        <!-- {{ form.questionChoice }} -->
+						<label for="num_questions">Number of multiple-choice questions:</label>
+    					<input type="number" name="num_questions" id="num_questions" required><br><br>
                       </div>
                     </div>
                     <div class="col">
                     
                       <div class="form-outline">
-						<label for="num_shortquestions">Number of questionsshort:</label>
-  						<input type="number" name="num_shortquestions" id="num_shortquestions">
-                        <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                        <!-- <label class="form-label" for="form9Example3">questionShort</label> -->
-                        <!-- {{ form.questionChoice }} -->
+						<label for="num_shortquestions">Number of short-answer questions:</label>
+						<input type="number" name="num_shortquestions" id="num_shortquestions" required><br><br>
                       </div>
                     </div>
 
                     <div class="col">
                     
                         <div class="form-outline">
-							<label for="num_longquestions">Number of questionlong:</label>
-						    <input type="number" name="num_longquestions" id="num_longquestions">
-                          <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
-                          <!-- <label class="form-label" for="form9Example3">questionLong</label> -->
-                            {{ form.questionLong }}
+							<label for="num_longquestions">Number of long-answer questions:</label>
+							<input type="number" name="num_longquestions" id="num_longquestions" required><br><br>
                         </div>
                       </div>
                   </div>
@@ -400,11 +391,14 @@ $(document).ready(function(){
                     
                     <div class="col">
                         <!-- Email input -->
+                        <div class="col">
+                    
                         <div class="form-outline">
-                          <!-- <input type="text" id="form9Example3" name="questiontext" class="form-control" /> -->
-                          <label class="form-label" for="form9Example3">ExaminationDescription</label>
-                          {{ form.examinationDescription }}
+                          <!-- <input type="text" id="form9Example3" name="topic" class="form-control" /> -->
+                          <label class="form-label" for="form9Example3">QuestionSection</label>
+                          {{ form.questionSection }}
                         </div>
+                      </div>
                       </div>
 
                       <div class="col">
