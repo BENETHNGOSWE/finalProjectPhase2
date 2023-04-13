@@ -20,7 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("mtihani.urls")),
     path('', include("FYPAPP.urls")),
-    # path('authapp/', include("authapp.urls")),
+    path('', include("authapp.urls")),
 ]
 
 

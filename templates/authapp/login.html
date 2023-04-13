@@ -1,0 +1,119 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+ <html>
+   <head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
+    <style>
+        .navbar {
+          height: 200px;
+        }
+        .navbardown {
+            height:40px;
+        }
+        .title{
+            margin-left: 10em;
+            font-size: 30px;
+            color: white;
+        }
+        .homeinfo{
+            margin-top:190px;
+            margin-left: 20em;
+            margin-right: 20em;
+        }
+        .form-group {
+            flex: 0 0 200px;
+        }
+        .v {
+            /* display: flex; */
+            /* flex-direction: row; */
+            /* justify-content: flex-end; */
+            width: 200px;
+            /* line-height: 26px; */
+            /* margin-bottom: 10px; */
+
+        }
+
+        .line-between {
+            position: relative;
+        }     
+        .line-between::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 47%;
+            width: 1px;
+            height: 100%;
+            background-color: black;
+        }
+
+    </style>    
+    <title>Exam Questions</title>
+   </head>
+   <body>
+    <div class="container">
+        <nav class="navbars fixed-top navbar-light bg-info">
+            <div class="container-fluid">
+                <img src="{% static 'images/nit.png'%}">
+              <h2 class="title fw-bold" >NATIONAL INSTUTUTE OF TRANSPORT</h2>
+              <h3 class="title">AUTOMATIC EXAMINATION GENERATOR</h3>
+            </div>
+          </nav>
+    </div>
+    <div class="homeinfo">
+        <div class="line-between">
+        <div class="row">
+          <div class="col-md-6">
+            <h2>Welcome to AEGNIT</h2>
+            <p class="font-size=30px">The Automatic Examination Generator (SIMS)<br>holds all the information relating to examination generation.</p>
+            <br><br>
+            <h2>Welcome to AEGNIT</h2>
+            <p class="font-size=30px">The Automatic Examination Generator (SIMS)<br>holds all the information relating to examination generation.</p>
+            <br>
+            <h2>Welcome to AEGNIT</h2>
+            <p class="font-size=30px">The Automatic Examination Generator (SIMS)<br>holds all the information relating to examination generation.</p>
+          </div>
+
+
+          <div class="col-md-6">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <h3 class="fw-bold">LOGIN HERE</h3>
+                <hr>
+              <div class="form-group">
+                <label for="fname">UserName:</label>
+                <input type="text" class="form-control" placeholder="Enter your User Name" name='uname'>
+              </div>
+              <br>
+              <div class="form-group">
+                <label for="fname">Password:</label>
+                <input type="password" class="form-control" placeholder="Enter your password" name='pass'>
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary">LOGIN</button>
+              <p>dont have an account? <a href="{% url 'register-page' %}">Register</a></p>
+            </form>
+            </form>
+          </div>
+        </div>
+       </div>
+      </div>
+
+      
+
+    <div class="container">
+        <nav class="navbardown fixed-bottom navbar-light bg-info">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">@2022-2023 NATIONAL INSTITUTE OF TRANSPORT</a>
+            </div>
+          </nav>
+    </div>
+   </body>
+ </html>
+ {% endblock content %}

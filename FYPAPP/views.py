@@ -3,7 +3,7 @@ from django.views.generic import TemplateView
 from .models import Course, Masomo, Question,QuestionChoice
 from .forms import QuestionForm, CourseForm, MasomoForm, QuestionChoiceForm
 from django.db import connection
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -15,12 +15,12 @@ from django.db import connection
 # def dashboard(request):
 #     return render(request, 'FYPAPP/dashboard.html')
 
-
+# @login_required
 def course_manage(request):
     context = {'course':  Course.objects.all()}
     return render(request, 'FYPAPP/course_manage.html', context)
 
-
+# @login_required
 def add_course(request):
     if request.method == "POST":
         form = CourseForm(request.POST)
