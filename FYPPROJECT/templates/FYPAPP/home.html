@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Examination Machine</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    
+    <style>
+
+        
+        body {
+            background-color: #e6e6e6; 
+        }
+        .boxkushoto .sidebar{
+            background: rgba(25,107,140,255);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 240px;
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: all 0.3s ease;
+        }
+
+        /* .navigationBar {
+            background-color: white;
+            height: 50px;
+            display: flex;
+            padding: 38px 0px;
+            align-items: center;
+            box-shadow: 0 4px 2px -2px #c5c6c7;
+        } */
+
+        .sidebar-header {
+            padding: 10px 25px 10px 15px;
+        }
+        .sidebar-logo-container {
+            background-color: rgb(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding-left: 3px;
+            display: flex;
+        }
+
+        .brand-name-container {
+            margin: 10px 55px 0px 2px;
+            padding: 0px;
+        }
+
+        .brand-name {
+            color: white;
+            margin: 0px;
+            line-height: 1.1rem; 
+            font-size: 16px;
+            letter-spacing: 1px;
+            font-family: 'Roboto', sans-serif;
+        }
+        .brand-subname {
+            font-weight: 300;
+            font-size: 14px;
+        }
+        .navigation-list {
+            list-style-type:none;
+            padding: 0px 18px;
+            margin-top: 30px;
+        }
+        .btn{
+            color: white;
+        }
+        .exam-header{
+            color: black;
+        }
+        
+    </style>
+    </head>
+
+    <body>
+   
+    <div class="boxkushoto">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-container">
+                    <div class="brand-name-container">
+                        <p class="brand-name">
+                            Examination<br />
+                            <span class="brand-subname">
+                                Machine
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-body">
+                <ul class="navigation-list">
+                    <div class="exam-header"><h5>Exam</h5></div>
+                    <hr style="color:rgb(255, 255, 255);margin-top:12px;">
+
+                    <div>
+                        
+                        <button type="button" class="btn btn-white">DASHBOARD</button>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          COURSE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_course' %}">ADD COURSE</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:course_manage' %}">MANAGE COURSE</a></li>
+                          
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          MODULE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_module' %}">ADD MODULE</a></li>
+                          <li><a class="dropdown-item" href="#">ADD MODULE TOPICS</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:module_manage' %}">MANAGE MODULE</a></li>
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn"  id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          QUESTION
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_question' %}">ADD MULTIPE CHOICE</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_question' %}">ADD SHORT TERMS</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_question' %}">ADD LONG TERMS</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:question_manage' %}">MANAGE QUESTION</a></li>
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <!-- <i class="fas fa-users"></i> -->
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" >QUESTION PAPER </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item" href="{% url 'mtihani:add_exam' %}">ADD EXAM</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mtihani:exam_manage' %}"> MANAGE EXAM </a></li>
+                        </ul>
+                        <!-- <a href="{% url 'FYPAPP:question_manage' %}" class="btn btn-outline-dark ms-2">List All</a> -->
+
+                    </div>
+                    <br/>
+
+                    <hr style="color:rgb(255, 255, 255);margin-top:30px;">
+                    <div class="exam-header"><h5>Profile</h5></div>
+                    <hr style="color:rgb(255, 255, 255);margin-top:30px;">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        <button type="button" class="btn btn-white">PROFILE</button>
+                    </div>
+
+                </ul>
+
+            </div>
+        </div>
+        
+        <!-- <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+        </div> -->
+        
+    </div>
+ 
+    <!-- <h3 class="text-center">LOGIN</h3> -->
+    <script>
+        let sidebarToggle = document.querySelector(".sidebarToggle");
+        sidebarToggle.addEventListener("click", function(){
+            document.querySelector("body").classList.toggle("active");
+            document.getElementById("sidebarToggle").classList.toggle("active");
+        })
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    {% block content %}
+    {% endblock content%}
+  </body>
+
+
+</html>

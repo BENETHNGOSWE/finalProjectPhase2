@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+     <!-- Font Awesome -->
+	 <link
+	 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+	 rel="stylesheet"
+   />
+   <!-- Google Fonts -->
+   <link
+	 href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+	 rel="stylesheet"
+   />
+   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	   crossorigin="anonymous">
+   </script>
+    <style>
+
+    </style>
+    </head>
+
+
+    <body>
+   
+    <div class="page">
+
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo-container">
+                    <div class="logo-container">
+                        <img class="logo-sidebar" src="assets/img/logo.png" />
+                    </div>
+                    <div class="brand-name-container">
+                        <p class="brand-name">
+                            Examination<br />
+                            <span class="brand-subname">
+                                Machine
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="sidebar-body">
+                <ul class="navigation-list">
+                    <h5>EXAM</h5>
+                    <hr style="color:rgb(255, 255, 255);margin-top:12px;">
+
+                    <div>
+                        <!-- <i class="fas fa-users"></i> -->
+                        <button type="button" class="btn btn-white">DASHBOARD</button>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          COURSE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_course' %}">ADD COURSE</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:course_manage' %}">MANAGE COURSE</a></li>
+                          
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          MODULE
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_module' %}">ADD MODULE</a></li>
+                          <li><a class="dropdown-item" href="#">ADD MODULE TOPICS</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:module_manage' %}">MANAGE MODULE</a></li>
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          QUESTION
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:add_question' %}">ADD QUESTION</a></li>
+                          <li><a class="dropdown-item" href="{% url 'FYPAPP:question_manage' %}">MANAGE QUESTION</a></li>
+                        </ul>
+                    </div>
+                    <br/>
+
+                    <div class="dropdown">
+                        <!-- <i class="fas fa-users"></i> -->
+                        <button class="btn btn-white" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" >QUESTION PAPER </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                            <li><a class="dropdown-item" href="{% url 'mtihani:add_exam' %}">ADD EXAM</a></li>
+                            <li><a class="dropdown-item" href="{% url 'mtihani:exam_manage' %}"> MANAGE EXAM </a></li>
+                        </ul>
+                        <!-- <a href="{% url 'FYPAPP:question_manage' %}" class="btn btn-outline-dark ms-2">List All</a> -->
+
+                    </div>
+                    <br/>
+
+                    <hr style="color:rgb(255, 255, 255);margin-top:30px;">
+                    <H5>PROFILE</H5>
+                    <hr style="color:rgb(255, 255, 255);margin-top:30px;">
+                    <div>
+                        <i class="fas fa-users"></i>
+                        <button type="button" class="btn btn-white">PROFILE</button>
+                    </div>
+
+                </ul>
+
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="navigationBar">
+                <button id="sidebarToggle" class="btn sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+            </div>
+        </div>
+        
+    </div>
+ 
+
+    <script>
+        let sidebarToggle = document.querySelector(".sidebarToggle");
+        sidebarToggle.addEventListener("click", function(){
+            document.querySelector("body").classList.toggle("active");
+            document.getElementById("sidebarToggle").classList.toggle("active");
+        })
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    {% block content %}
+    {% endblock content%}
+  </body>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% block content %}
+<!DOCTYPE html>
+ <html>
+   <head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <title>Exam Questions</title>
+    <style>
+        .container-aside{
+            color: #000;
+            background-color: rgba(0, 139, 12, 0.644);
+            height: 46.6em;
+            margin-right: 85em;
+            /* margin-top: auto; */
+        }
+        .aside-header{
+            color: aliceblue;
+            margin-left: 6px;
+        
+        }
+        .h3{
+            margin-top: 6px;
+        }
+        .btn{
+            color: aliceblue;
+            /* margin-left: 7px; */
+        }
+        .profile{
+            margin-top: 15em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-aside">
+        <h3 class="aside-header">EXAMINATION</h3>
+        <hr>
+        
+        <div class="btn btn-group dropend">
+            <button type="button" class="btn " data-bs-toggle="dropdown" aria-expanded="false">
+                DASHBOARD
+            </button>
+          </div>
+          <br><hr>
+          <div class="btn btn-group dropend">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                COURSE
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">ADD COURSE</a></li>
+                <li><a class="dropdown-item" href="#">MANAGE COURSE</a></li>
+            </ul>
+          </div>
+          <br><hr>
+          <div class="btn btn-group dropend">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                MODULE
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'FYPAPP:add_module' %}">ADD MODULE</a></li>
+                <li><a class="dropdown-item" href="#">MANAGE MODULE</a></li>
+            </ul>
+          </div>
+          <br><hr>
+          <div class="btn btn-group dropend">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                QUESTION
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">MULTIPE CHOICE</a></li>
+                <li><a class="dropdown-item" href="#">SHORT TERMS</a></li>
+                <li><a class="dropdown-item" href="#">LONG QUESTION</a></li>
+            </ul>
+          </div>
+          <br><hr>
+          <div class="btn btn-group dropend">
+            <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                PAPER
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">ADD EXAMS</a></li>
+                <li><a class="dropdown-item" href="#">MANAGE EXAM</a></li>
+            </ul>
+          </div>
+
+          <div class="profile">
+            <div class="btn btn-group dropend">
+                <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                 PROFILE
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item">LOGIN</a></li>
+                  <li><a class="dropdown-item">LOGOUT</a></li>
+                </ul>
+              </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'FYPAPP/home.html' %}
+
+
+{% block content%}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <style type="text/css">
+    .dashboard-header{
+      background: linear-gradient(to right, #2634eb, #829df3 90%);
+      border-radius: 5px;
+      background-color: rgba(113, 185, 202, 255);
+      color: white;
+
+    }
+    .containerkuu{
+      /* background-color: #F56565; */
+      position: relative;
+      margin-left: 16em;
+      margin-top: 1em;
+      width: 83em;
+      height: 29em;
+    }
+  
+    .card{
+      /* display: inline-flex; */
+      width: 19rem;
+      height: 7em;
+      margin-top: 1em;
+      margin-left: 1em;
+      margin-right: 0.6em;
+      margin-bottom: 1em;
+      background: linear-gradient(to right, #2634eb, #829df3 90%);
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      border-radius: 5px;
+    }
+    .card-body{
+      margin-top: 1em;
+      width: 20em;
+      height: 7em;
+      /* background-color: #F56565; */
+      /* color: black; */
+    }
+    .card2{
+      /* display: inline-flex; */
+      width: 19rem;
+      height: 7em;
+      margin-top: 1em;
+      margin-left: 1em;
+      margin-right: 0.6em;
+      margin-bottom: 1em;
+      background: linear-gradient(to right, #4CAF50, #6fbf73);
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      border-radius: 5px;
+      /* background: linear-gradient(to right, #e93e3e, #eb5c5c 90%); */
+      }
+    .card2-body{
+      margin-top: 1em;
+      width: 20em;
+      height: 7em;
+      /* background-color: #F56565; */
+      /* color: black; */
+    }
+    .card3{
+      /* display: inline-flex; */
+      width: 19rem;
+      height: 7em;
+      margin-top: 1em;
+      margin-left: 1em;
+      margin-right: 0.6em;
+      margin-bottom: 1em;
+      background: linear-gradient(to right, #db6f26, #e69056 90%);
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      border-radius: 5px;
+    }
+    .card3-body{
+      margin-top: 1em;
+      width: 20em;
+      height: 7em;
+      /* background-color: #F56565; */
+      /* color: black; */
+    }
+    .card4{
+      /* display: inline-flex; */
+      width: 19rem;
+      height: 7em;
+      margin-top: 1em;
+      margin-left: 1em;
+      margin-right: 0.6em;
+      margin-bottom: 1em;
+      /* background-color: rgba(235,79,80,255); */
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      border-radius: 5px;
+      background: linear-gradient(to right, #e93e3e, #eb5c5c 90%);
+    }
+    .card4-body{
+      margin-top: 1em;
+      width: 20em;
+      height: 7em;
+      /* background-color: #F56565; */
+      /* color: black; */
+    }
+    .row{
+      /* white-space: 2em; */
+      position: relative;
+    }
+    .quick{
+      margin-left: 3em;
+      border-radius: 5px;
+      width: 37em;
+      height: 11em;
+      margin-top: 2em;
+      background-color: white;
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+    
+    }
+    .quick-links-btn{
+      background-color: white;
+      box-shadow: 3px 3px 2.5px 5px rgb(242, 244, 245);
+      width: 35em;
+      height: 5.5em;
+      margin-left: 14px;
+    }
+    .quick-links-btn-header{
+      /* margin-top: -0.7em; */
+      margin-left: 0.9em;
+      margin-bottom: -0.3em;
+    }
+    
+    .quick-header{
+      /* margin-top: 2em; */
+      margin-left: 0.6em;
+      color: black;
+    }
+    .notification{
+      margin-top: -12em;
+      position: relative;
+      margin-left: 45em;
+      margin-right: 0.9em;
+      height: 25em;
+      background-color: white;
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      border-radius: 5px;
+    }
+    .dashboard-header{
+      /* background-color: #04868f; */
+      margin-top: 1em;
+      position: relative;
+      margin-left: 0.2em;
+      margin-right: 2em;
+    }
+    .btn{
+      margin-top: 2em;
+      white-space: 2em;
+    }
+    .space {
+      width: 1px;
+      height: auto;
+      display: inline-block;
+    }
+    .space2 {
+      width: 1em;
+      height: 1em;
+      /* display: inline-block; */
+    }
+    .spacee {
+      width: 2em;
+      height: auto;
+      display: inline-block;
+    }
+    .card-columns{
+      margin-left: 7.3em;
+      margin-right: 18em;
+      width: 50em;
+      height: 30em;
+    }
+
+   .nafasi{
+    display: inline-flex;
+    /* background-color: aqua; */
+   }
+   .a444{
+      /* background-color: #F56565; */
+      height: 11em;
+      
+   }
+   .quick-links-btn2{
+      /* background-color: rgb(192, 6, 6); */
+      width: 17em;
+      height: 5em;
+      margin-left: 14px;
+      /* display: inline-flex; */
+    }
+    .rowcol{
+      background-color: white;
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+      margin-top: 1.9em;
+      border-radius: 5px;
+      height: 25em;
+      /* width: 23em; */
+
+    }
+    .row{
+      margin-top: 5.5em;
+    }
+    .col{
+      display: inline-flex;
+      margin-top: -4em;
+    }
+    .masomoyangu{
+      /* background-color: #4C51BF; */
+      margin-top: 2em;
+      background-color: white;
+      box-shadow: 2px 2px 2.5px 3px rgb(242, 244, 245);
+    }
+    .button{
+      margin-top: -2.7em;
+      margin-left: 0.5em;
+    }
+    .card-header{
+      margin-left: 1px;
+      margin-top: 0.6em;
+      color: white;
+    }
+    </style>
+  </head>
+<body>
+  <div class="containerkuu">
+    <div class="dashboard-header">
+      <h2 class="text-center">DASHBOARD</h2>
+    </div>
+    <div class="nafasi">
+      <div class="maswali">
+        <div class="rowcol">
+            <h3 class="quick-header">Quick Links</h3><hr>
+            <div class="row">
+              <div class="col">
+                <div class="card">
+                  <p class="card-header "><b>TOTAL COURSE</b></p>
+                </div>
+                <div class="space2"></div>
+                <div class="card2">
+                  <p class="card-header"><b>TOTAL QUESTIONS</b></p>
+                </div>
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col">
+                <div class="card3">
+                  <p class="card-header"><b>TOTAL COURSE</b></p>
+                </div>
+                <div class="space2"></div>
+                <div class="card4">
+                  <p class="card-header"><b>TOTAL EXAMS</b></p>
+                </div>
+              </div>
+           </div>
+
+           <div class="masomoyangu">
+            <h3 class="quick-header">Quick Links</h3>
+          <div class="masomoyangu-table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First</th>
+                  <th scope="col">Last</th>
+                  <th scope="col">Handle</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td colspan="2">Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </table>
+          </div> 
+         </div> 
+        </div>
+        
+      </div>
+
+    <div class="quick">
+      <h3 class="quick-header">Quick Links</h3><hr>
+      <div class="quick-links-btn">
+        <h6 class="quick-links-btn-header">ADD QUESTION FOR</h6><hr>
+        <div class="button">
+          <button class="btn" style="background: linear-gradient(to right, #2634eb, #829df3 90%);">MULTIPE CHOICE</button>
+          <button class="btn"style="background: linear-gradient(to right, #4CAF50, #6fbf73)">SHORT TERMS</button>
+          <button class="btn" style="background: linear-gradient(to right, #db6f26, #e69056 90%);">LONG TERMS</button>
+          <button class="btn " style="background: linear-gradient(to right, #e93e3e, #eb5c5c 90%);">MANAGE QNS</button>
+        </div>
+      </div>
+   </div> 
+   
+  </div>
+
+
+  <div class="notification">
+    <h3 class="quick-header">Quick Links</h3><hr>
+  <div class="quick-links-btn ">
+    <h6 class="quick-links-btn-header">COURSE</h6><hr>
+    <div class="button">
+      <button class="btn" style="background: linear-gradient(to right, #2634eb, #829df3 90%);">ADD COURSE</button>
+      <button class="btn " style="background: linear-gradient(to right, #e93e3e, #eb5c5c 90%);">MANAGE COURSE</button>
+    </div>
+  </div><br>
+  <div class="quick-links-btn">
+    <h6 class="quick-links-btn-header">MODULE</h6><hr>
+    <div class="button">
+      <button class="btn" style="background: linear-gradient(to right, #2634eb, #829df3 90%);">ADD MODULE</button>
+      <button class="btn " style="background: linear-gradient(to right, #e93e3e, #eb5c5c 90%);">MANAGE MODULE</button>
+    </div>
+  </div><BR>
+  <div class="quick-links-btn">
+    <h6 class="quick-links-btn-header">EXAM</h6><hr>
+    <div class="button">
+      <button class="btn btn-primary">EXAM</button>
+      <button class="btn " style="background: linear-gradient(to right, #e93e3e, #eb5c5c 90%);">MANAGE EXAM</button>
+    </div>
+  </div>
+  </div>
+
+
+<script src="http://netdna.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+
+
+</div>
+</body>
+
+{% endblock content %}
+
+<!-- <div class="quick-links">
+  <p class="quick-header">QUICK LINKS</p>
+  <div class="quick-links-btn text-center">
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <div class="space"></div>
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <div class="space"></div>
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+    <div class="space"></div>
+    <button type="button" class="btn btn-outline-primary">Primary</button>
+  </div>
+</div> -->

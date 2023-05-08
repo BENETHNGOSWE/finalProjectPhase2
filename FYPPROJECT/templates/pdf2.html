@@ -1,0 +1,180 @@
+<!-- <html>
+    <head>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        {{exam}}
+        <hr>
+        {{exam.questionChoice}}
+         {{exam.questionChoice}}
+        {{exam.questionLong}} -->
+    <!-- </body> -->
+<!-- </html> -->
+
+
+ <!-- result.html -->
+ <!DOCTYPE html>
+ <html>
+   <head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+   
+
+    <title>Exam Questions</title>
+   </head>
+   <body>
+    <h3 class="text-center">{{ exam_name }}</h3> 
+    <h4 class="text-center">SEMETER {{ semeter }}</h4> <br>
+
+    
+     <div class="d-flex justify-content-between">
+        <p class="fw-bold">MODULE: {{ module }} </P>
+        <p class="fw-bold">TIME: {{ examtime }}</p>
+     </div>
+     <div class="d-flex justify-content-between">
+        <p class="fw-bold">MODULECODE: {{ modulecode }}</p>
+        <p class="fw-bold">DATE: {{ examdate }}</p>
+     </div>
+   
+        <p class="fw-bold">INSTRUCTION:</p>
+        
+        <!-- <div class="d-flex flex-column bd-highlight mb-3"> -->
+            <div class="p-2 bd-highlight">{{ examinationDescription }}</div>
+            <div class="p-2 bd-highlight">{{ examinationDescription2 }}</div>
+            <div class="p-2 bd-highlight">{{ examinationDescription3 }}</div>  
+        <!-- </div> -->
+        <hr>
+     <h3 class="text-center">SECTION A</h3>
+   
+     <p class="fw-bold">Multiple Choice questions</p>
+     {% for question in questions %}
+       <p>{{ question.question }}</p>
+       <p>{{ question.option1 }}</p>
+       <p>{{ question.option2 }}</p>
+       <p>{{ question.option3 }}</p>
+       <p>{{ question.option4 }}</p>
+     {% endfor %}
+     
+     <h3 class="text-center">SECTION B </h3>
+    
+     <p class="fw-bold">Short Answers Questions</p>
+     {% for question in questionshort %}
+       <p>{{ question.question }}</p>
+     {% endfor %}
+     
+     <h3 class="text-center">SECTION C </h3>
+ 
+     <p class="fw-bold">Descriptive Questions </p>
+     {% for question in questionlong %}
+       <p>{{ question.question }}</p>
+     {% endfor %}
+
+   </body>
+ </html>
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+ <!-- <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Exam Questions</title>
+</head>
+<body>
+    <p>Examination Name: {{ exam_name }}</p>
+
+    <div class="d-flex justify-content-between">
+        <p class="fw-bold">MODULE: {{ module }} </P>
+        <p class="fw-bold">SEMETER: {{ semeter }}</p>
+    </div>
+    <div class="d-flex justify-content-between">
+        <p class="fw-bold">MODULECODE: {{ modulecode }}</p>
+        <p class="fw-bold">DATE: {{ examdate }}</p>
+    </div>
+
+    <p class="fw-bold">INSTRUCTION:</p>
+
+    <div class="d-flex flex-column bd-highlight mb-3">
+        <div class="p-2 bd-highlight">{{ examinationDescription }}</div>
+        <div class="p-2 bd-highlight">{{ examinationDescription2 }}</div>
+        <div class="p-2 bd-highlight">{{ examinationDescription3 }}</div>  
+    </div>
+
+    <hr>
+    <h3 class="text-center">SECTION A</h3>
+    <br>
+    <p class="fw-bold">Multiple Choice questions</p>
+    {% for question in questions %}
+        <p>{{ forloop.counter }}. {{ question.question }}</p>
+    {% endfor %}
+
+    <h3 class="text-center">SECTION B </h3>
+    <br>
+    <p class="fw-bold">Short Answers Questions</p>
+    {% for question in questionshort %}
+        <p>{{ forloop.counter }}. {{ question.question }}</p>
+    {% endfor %}
+
+    <h3 class="text-center">SECTION C </h3>
+    <br>
+    <p class="fw-bold">Descriptive Questions </p>
+    {% for question in questionlong %}
+        <p>{{ forloop.counter }}. {{ question.question }}</p>
+    {% endfor %}
+
+</body>
+</html>
+ -->
